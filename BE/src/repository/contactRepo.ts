@@ -52,10 +52,19 @@ const sendQuery = async (request: Request, response: Response) => {
                 from: process.env.BE_EMAIL,
                 to: process.env.BE_EMAIL, // Receiving email
                 subject: "User Review",
-                text: `You have a new review from:
-                    Name: ${request?.body?.name}
-                    EmailId: ${request?.body?.email}
-                    Review: ${request?.body?.review || "No Review Provided"}`,
+                html: `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                  <h2 style="color:#a4204d;">You have a new review from the Learn-Tech website</h2>
+              
+                  <p style="font-size: 16px; color: #555;"><strong>Name :</strong> ${request?.body?.name}</p>
+                  <p style="font-size: 16px; color: #555;"><strong>Email ID :</strong> ${request.body?.email}</p>
+                  <p style="font-size: 16px; color: #555;"><strong>Review :</strong> ${request?.body?.review || "<em>No Review Provided</em>"}</p>
+              
+                  <hr style="border: 1px solid #ddd; margin: 20px 0;"/>
+              
+              
+                </div>
+              `
             };
         }
 
