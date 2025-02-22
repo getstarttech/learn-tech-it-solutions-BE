@@ -60,10 +60,19 @@ const sendQuery = (request, response) => __awaiter(void 0, void 0, void 0, funct
                 from: process.env.BE_EMAIL,
                 to: process.env.BE_EMAIL, // Receiving email
                 subject: "User Review",
-                text: `You have a new review from:
-                    Name: ${(_h = request === null || request === void 0 ? void 0 : request.body) === null || _h === void 0 ? void 0 : _h.name}
-                    EmailId: ${(_j = request === null || request === void 0 ? void 0 : request.body) === null || _j === void 0 ? void 0 : _j.email}
-                    Review: ${((_k = request === null || request === void 0 ? void 0 : request.body) === null || _k === void 0 ? void 0 : _k.review) || "No Review Provided"}`,
+                html: `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                  <h2 style="color:#a4204d;">You have a new review from the Learn-Tech website</h2>
+              
+                  <p style="font-size: 16px; color: #555;"><strong>Name :</strong> ${(_h = request === null || request === void 0 ? void 0 : request.body) === null || _h === void 0 ? void 0 : _h.name}</p>
+                  <p style="font-size: 16px; color: #555;"><strong>Email ID :</strong> ${(_j = request.body) === null || _j === void 0 ? void 0 : _j.email}</p>
+                  <p style="font-size: 16px; color: #555;"><strong>Review :</strong> ${((_k = request === null || request === void 0 ? void 0 : request.body) === null || _k === void 0 ? void 0 : _k.review) || "<em>No Review Provided</em>"}</p>
+              
+                  <hr style="border: 1px solid #ddd; margin: 20px 0;"/>
+              
+              
+                </div>
+              `
             };
         }
         yield transporter.sendMail(mailOptions);
